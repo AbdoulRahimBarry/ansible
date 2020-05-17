@@ -1,0 +1,25 @@
+- name: Deploy battlebaot app 
+  hosts: groupe_one 
+  gather_facts: False
+  become: true
+  vars_files:
+    - "secret/login-and-password.yml"
+
+  vars:
+    pip_install_packages:
+      - name: docker
+
+  pre_tasks:
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+    - name: install epel release
+      yum:
+        name: epel-release
+        state: installed
+  roles:
+    - role: 'role/folder-role'
+    - role: 'geerlingguy.pip'
+    - role: 'geerlingguy.docker'
+    - role: 'geerlingguy.git'

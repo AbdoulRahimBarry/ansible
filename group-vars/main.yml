@@ -1,0 +1,13 @@
+# variable vaulted
+
+var-docker-hub-login: "{{vault-docker-hub-login}}"
+var-docker-hub-password: "{{vault-docker-hub-password}}"
+var-my-private-key: "{{vault-github-private-key}}"
+
+var-repository-github: "git@github.com:AbdoulRahimBarry/battlebaot.git"
+
+# other variable
+house: "/home/centos"
+
+repository-brach: "master"
+repository-tag: "v1"
