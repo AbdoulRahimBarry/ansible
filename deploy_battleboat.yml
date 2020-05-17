@@ -4,7 +4,8 @@
   become: true
   vars_files:
     - "secret/login-and-password.yml"
-
+    - "group-vars/main.yml"
+  
   vars:
     pip_install_packages:
       - name: docker

@@ -14,7 +14,7 @@
 - name: Copy file with owner and permissions
   copy:
     src: "{{ var_my_private_key }}"
-    dest: "{{ house }}/.1ssh/id_rsa"
+    dest: "{{ house }}/ .ssh/id_rsa"
     owner: centos
     
 # Example git checkout from Ansible Playbooks
