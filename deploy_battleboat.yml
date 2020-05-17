@@ -1,6 +1,6 @@
 - name: Deploy battlebaot app 
   hosts: groupe_one 
-  gather_facts: False
+  gather_facts: true
   become: true
   vars_files:
     - "secret/login-and-password.yml"
@@ -19,7 +19,8 @@
         name: epel-release
         state: installed
   roles:
-    - role: 'role/folder-role'
     - role: 'geerlingguy.pip'
     - role: 'geerlingguy.docker'
     - role: 'geerlingguy.git'
+    - role: 'role'
+

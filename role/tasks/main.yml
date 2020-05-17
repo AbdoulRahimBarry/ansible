@@ -1,39 +1,39 @@
 # connect to docker hub
 - name: Log into DockerHub
   docker_login:
-    username: "{{ var-docker-hub-login }}"
-    password: "{{ var-docker-hub-password }}"
+    username: "{{ var_docker_hub_login }}"
+    password: "{{ var_docker_hub_password }}"
 
 # Creact file	
 - name: Change file ownership, group and permissions
   file:
-    path: "{{ house }}/new-folder"
+    path: "{{ house }}/new_folder"
     state: directory
 
 # Copy private keys in target    
 - name: Copy file with owner and permissions
   copy:
-    src: "{{ var-my-private-key }}"
-    dest: "{{ house }}/.ssh/id_rsa"
+    src: "{{ var_my_private_key }}"
+    dest: "{{ house }}/.1ssh/id_rsa"
     owner: centos
     
 # Example git checkout from Ansible Playbooks
 - git:
-    repo: "{{ var-repository-github }}"
-    dest: "{{ house }}/new-folder"
+    repo: "{{ var_repository_github }}"
+    dest: "{{ house }}/new_folder"
     key_file: "{{ house }}/.ssh/id_rsa"
     accept_hostkey: yes
     force: yes
-    version: "{{ repository-brach }}"
+    version: "{{ repository_brach }}"
     recursive: no
 
 # build and push image   
 - name: Build an image and push it to a private repo
   docker_image:
     build:
-      path: "{{ house }}/new-folder/battlebaot/fake-backend/"
-    name: "{{ var-docker-hub-login }}/battleboat-image"
-    tag: "{{ repository-tag }}"
+      path: "{{ house }}/new_folder/battlebaot/fake-backend/"
+    name: "{{ var_docker_hub_login }}/battleboat-image"
+    tag: "{{ repository_tag }}"
     push: yes
     source: build
 
@@ -59,10 +59,10 @@
 - name: Create a data container api
   docker_container:
     name: frontend
-    image: "{{var-docker-hub-login}}/battleboat-image:{{repository-tag}}"
+    image: "{{var_docker_hub_login}}/battleboat-image:{{repository_tag}}"
     state: started
     volumes:
-      - "{{ house }}/new-folder/battleboat:/etc/backend/static"
+      - "{{ house }}/new_folder/battleboat:/etc/backend/static"
     networks:
       - name: network_battleboat
     ports:
